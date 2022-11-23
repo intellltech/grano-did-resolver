@@ -3,15 +3,14 @@
 
 const GranoDidResolver = require('../../lib/GranoDidResolver')
 
-const { mockDidConfig } = require('../mocks/MockDidConfig')
-const MockDidClient = require('../mocks/MockDidClient')
+const MockGranoDidClient = require('../mocks/MockGranoDidClient')
 
 describe('GranoDidResolver', () => {
   describe('.create()', () => {
     test('instance of the class', async () => {
-      const mockDidClient = await MockDidClient.createFulfilled(mockDidConfig)
+      const mockGranoDidClient = new MockGranoDidClient
       const granoDidResolverParams = {
-        didClient: mockDidClient,
+        granoDidClient: /** @type{*} */ (mockGranoDidClient),
       }
       const resolver = GranoDidResolver.create(granoDidResolverParams)
 
@@ -56,21 +55,21 @@ describe('GranoDidResolver', () => {
         params,
         expected,
       }) => {
-        const mockDidClient = await MockDidClient.createFulfilled(mockDidConfig)
+        const mockGranoDidClient = new MockGranoDidClient
         const granoDidResolverParams = {
-          didClient: mockDidClient,
+          granoDidClient: /** @type{*} */ (mockGranoDidClient),
         }
         const resolver = GranoDidResolver.create(granoDidResolverParams)
 
-        const spyDidClient = jest.spyOn(resolver.client, 'controller').mockImplementation(() => Promise.resolve(params.mockResponse))
+        const spyGranoDidClient = jest.spyOn(resolver.client, 'controller').mockImplementation(() => Promise.resolve(params.mockResponse))
 
         const res = await resolver.resolve(params.did, params.parsedDid)
 
-        expect(spyDidClient).toHaveBeenCalledWith(expected.payload)
+        expect(spyGranoDidClient).toHaveBeenCalledWith(expected.payload)
 
         expect(res).toMatchObject(expected.response)
 
-        spyDidClient.mockRestore()
+        spyGranoDidClient.mockRestore()
       }
       )
     })

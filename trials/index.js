@@ -4,7 +4,7 @@
 const { Resolver } = require('did-resolver')
 const getResolver = require('../lib/resolver')
 
-const { DidClient } = require('@eg-easy/grano-did-client')
+const { GranoDidClient } = require('@eg-easy/grano-did-client')
 
 const mockDidConfigParams = {
   endPoint: 'http://localhost:26657',
@@ -14,9 +14,9 @@ const mockDidConfigParams = {
 }
 
 const main = async () => {
-  const didClient = await DidClient.createFulfilled(mockDidConfigParams)
+  const granoDidClient = await GranoDidClient.createFulfilled({ config: mockDidConfigParams })
 
-  const granoResolver = getResolver(didClient)
+  const granoResolver = getResolver(granoDidClient)
   const didResolver = new Resolver(granoResolver)
 
   const doc = await didResolver.resolve('did:grn:cosmos1qa2y6dr228egyhnclkhucx3mwc39pu0qtnkvdk')
