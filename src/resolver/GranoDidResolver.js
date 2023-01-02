@@ -1,6 +1,8 @@
 // @ts-check
 'use strict'
 
+const DatabaseClient = require('../app/DatabaseClient')
+
 /**
  * GranoDidResolver.
  */
@@ -11,9 +13,9 @@ class GranoDidResolver {
    * @param {GranoDidResolverParams} params - grano did resolver params
    */
   constructor ({
-    granoDidClient
+    databaseClient = new DatabaseClient()
   } = {}) {
-    this.client = granoDidClient
+    this.client = databaseClient
   }
 
   /**
@@ -40,11 +42,10 @@ class GranoDidResolver {
     options = {},
   ) {
     const controllerParam = {
-      contractAddress: 'wasm1qjxu65ucccpg8c5kac8ng6yxfqq85fluwd0p9nt74g2304qw8eyq49pt3a',
-      address: parsedDid.id,
+      identifier: parsedDid.id,
     }
 
-    const controllerResponse = await this.client.controller(controllerParam)
+    const controllerResponse = await this.client.fetchGranoDidDocument(controllerParam)
 
     return {
       didResolutionMetadata: {},
@@ -71,6 +72,6 @@ module.exports = GranoDidResolver
 
 /**
  * @typedef {{
- *   granoDidClient?: import('@eg-easy/grano-did-client').GranoDidClient,
+ *   databaseClient?: DatabaseClient
  * }} GranoDidResolverParams
  */
