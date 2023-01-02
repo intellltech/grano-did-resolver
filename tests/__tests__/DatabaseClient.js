@@ -15,8 +15,6 @@ describe('DatabaseClient', () => {
             identifier: 'grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
             controller: 'grano1m2pz9nj72lj2yxnpcmxqwfwk50v35gq7wd399m',
             version: 1,
-            createdAt: new Date('2023-01-02T15:28:24.589Z'),
-            updatedAt: new Date('2023-01-02T15:28:24.589Z'),
           }
         }
       ]
@@ -47,8 +45,6 @@ describe('DatabaseClient', () => {
             identifier: 'grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
             content: '{"service":["twitter"]}',
             version: 3,
-            createdAt: new Date('2023-01-02T15:28:24.599Z'),
-            updatedAt: new Date('2023-01-02T15:28:24.599Z'),
           }
         }
       ]
