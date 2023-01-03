@@ -10,7 +10,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "export NODE_ENV=development; jest --forceExit --detectOpenHandles",
+    "test": "export NODE_ENV=development; npm run db:setup; jest --forceExit --detectOpenHandles",
     "lint": "eslint .",
     "db:setup": "npm run db:drop; sequelize-cli db:migrate; sequelize-cli db:seed:all --seeders-path=sequelize/seeders",
     "db:drop": "rm sequelize/storage/*.sqlite3"
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "did-resolver": "^4.0.1",
-    "@eg-easy/grano-did-client": "^0.2.1",
+    "dotenv": "^16.0.3",
     "mariadb": "^3.0.2",
     "sequelize": "^6.26.0"
   }

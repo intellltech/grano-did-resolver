@@ -15,7 +15,7 @@ const main = async () => {
 
   const didDocument = await didResolver.resolve('did:grn:grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev', {})
 
-  console.log(didDocument)
+  console.dir(didDocument, { depth: 3 })
 }
 
 main()

@@ -41,18 +41,70 @@ class GranoDidResolver {
     parsedDid,
     options = {},
   ) {
-    const controllerParam = {
+    // validate did
+    // TODO
+
+    const didDocumentParam = {
       identifier: parsedDid.id,
     }
 
-    const controllerResponse = await this.client.fetchGranoDidDocument(controllerParam)
+    const granoDidDocumentResult = await this.client.fetchGranoDidDocument(didDocumentParam)
 
+    return this.createDefaultOutput( { did: did }, granoDidDocumentResult )
+  }
+
+  /**
+   * createDidDocument.
+   *
+   * @param {{ did: String }} input
+   * @param { Object } output
+   * @returns {import('did-resolver').DIDDocument}
+   */
+  createDidDocument (
+    input,
+    output,
+  ) {
     return {
-      didResolutionMetadata: {},
-      didDocumentMetadata: {},
-      didDocument: {
-        id: controllerResponse.controller
+      '@context': [
+        'https://www.w3.org/ns/did/v1',
+        'https://w3id.org/security/suites/secp256k1recovery-2020/v2'
+      ],
+      id: input.did,
+      verificationMethod: [
+        {
+          id: `did:grn:${output.controller}#controller`,
+          type: 'EcdsaSecp256k1RecoveryMethod2020',
+          controller: `did:grn:${output.controller}`,
+        },
+      ],
+      authentication: [
+        `did:grn:${output.controller}#controller`,
+      ],
+      assertionMethod: [
+        `did:grn:${output.controller}#controller`,
+      ],
+      controller: `did:grn:${output.controller}`,
+      service: output.service,
+    }
+  }
+
+  /**
+   * createDefaultOutput.
+   *
+   * @param {{ did: String }} input
+   * @param { Object } output
+   * @returns {import('did-resolver').DIDResolutionResult}
+   */
+  createDefaultOutput (
+    input,
+    output,
+  ) {
+    return {
+      didResolutionMetadata: {
+        contentType: 'application/did+ld+json'
       },
+      didDocumentMetadata: {},
+      didDocument: this.createDidDocument(input, output)
     }
   }
 
