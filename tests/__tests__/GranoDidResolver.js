@@ -1,16 +1,15 @@
 // @ts-check
 'use strict'
 
-const GranoDidResolver = require('../../lib/GranoDidResolver')
-
-const MockGranoDidClient = require('../mocks/MockGranoDidClient')
+const GranoDidResolver = require('../../src/resolver/GranoDidResolver')
+const DatabaseClient = require('../../src/app/DatabaseClient')
 
 describe('GranoDidResolver', () => {
   describe('.create()', () => {
     test('instance of the class', async () => {
-      const mockGranoDidClient = new MockGranoDidClient
+      const databaseClient = new DatabaseClient()
       const granoDidResolverParams = {
-        granoDidClient: /** @type{*} */ (mockGranoDidClient),
+        databaseClient: /** @type{*} */ (databaseClient),
       }
       const resolver = GranoDidResolver.create(granoDidResolverParams)
 
@@ -26,26 +25,25 @@ describe('GranoDidResolver', () => {
       const tables = [
         {
           params: {
-            did: 'did:grn:wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u',
+            did: 'did:grn:grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
             parsedDid: {
-              did: 'did:grn:wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u',
-              didUrl: 'did:grn:wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u',
+              did: 'did:grn:grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
+              didUrl: 'did:grn:grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
               method: 'grn',
-              id: 'wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u',
+              id: 'grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
             },
             mockResponse: {
-              controller: 'wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u',
+              controller: 'grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
             },
           },
           expected: {
             payload: {
-              contractAddress: 'wasm1qjxu65ucccpg8c5kac8ng6yxfqq85fluwd0p9nt74g2304qw8eyq49pt3a',
-              address: 'wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u',
+              identifier: 'grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
             },
             response: {
               didResolutionMetadata: {},
               didDocumentMetadata: {},
-              didDocument: { id: 'wasm14fsulwpdj9wmjchsjzuze0k37qvw7n7a7l207u' }
+              didDocument: { id: 'grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev' }
             },
           }
         }
@@ -55,13 +53,13 @@ describe('GranoDidResolver', () => {
         params,
         expected,
       }) => {
-        const mockGranoDidClient = new MockGranoDidClient
+        const databaseClient = new DatabaseClient()
         const granoDidResolverParams = {
-          granoDidClient: /** @type{*} */ (mockGranoDidClient),
+          databaseClient: /** @type{*} */ (databaseClient),
         }
         const resolver = GranoDidResolver.create(granoDidResolverParams)
 
-        const spyGranoDidClient = jest.spyOn(resolver.client, 'controller').mockImplementation(() => Promise.resolve(params.mockResponse))
+        const spyGranoDidClient = jest.spyOn(resolver.client, 'fetchGranoDidDocument').mockImplementation(() => Promise.resolve(params.mockResponse))
 
         const res = await resolver.resolve(params.did, params.parsedDid)
 

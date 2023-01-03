@@ -1,9 +1,6 @@
 // @ts-check
 'use strict'
 
-const { Resolver } = require('did-resolver')
-const getResolver = require('../lib/resolver')
-
 const DatabaseClient = require('../src/app/DatabaseClient')
 
 const main = async () => {

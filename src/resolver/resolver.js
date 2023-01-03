@@ -6,12 +6,12 @@ const GranoDidResolver = require('./GranoDidResolver')
 /**
  * getResolver.
  *
- * @param {import('@eg-easy/grano-did-client').GranoDidClient} client - instance of GranoDidClient
+ * @param {import('./../app/DatabaseClient')} client - instance of DatabaseClient
  * @returns {import('did-resolver').ResolverRegistry}
  */
 function getResolver (client) {
   return GranoDidResolver.create({
-    granoDidClient: client
+    databaseClient: client
   })
     .build()
 }
