@@ -14,7 +14,7 @@ PORT=3306
 ```
 
 2. Call Resolver
-```js
+```index.js
 const { Resolver } = require('did-resolver')
 const { getResolver, DatabaseClient } = require('@eg-easy/grano-did-resolver')
 
@@ -31,6 +31,36 @@ const main = async () => {
 }
 
 main()
+```
+
+## Sample Response
+```js
+{
+  didResolutionMetadata: { contentType: 'application/did+ld+json' },
+  didDocumentMetadata: {},
+  didDocument: {
+    '@context': [
+      'https://www.w3.org/ns/did/v1',
+      'https://w3id.org/security/suites/secp256k1recovery-2020/v2'
+    ],
+    id: 'did:grn:grano14fsulwpdj9wmjchsjzuze0k37qvw7n7am3reev',
+    verificationMethod: [
+      {
+        id: 'did:grn:grano1m2pz9nj72lj2yxnpcmxqwfwk50v35gq7wd399m#controller',
+        type: 'EcdsaSecp256k1RecoveryMethod2020',
+        controller: 'did:grn:grano1m2pz9nj72lj2yxnpcmxqwfwk50v35gq7wd399m'
+      }
+    ],
+    authentication: [
+      'did:grn:grano1m2pz9nj72lj2yxnpcmxqwfwk50v35gq7wd399m#controller'
+    ],
+    assertionMethod: [
+      'did:grn:grano1m2pz9nj72lj2yxnpcmxqwfwk50v35gq7wd399m#controller'
+    ],
+    controller: 'did:grn:grano1m2pz9nj72lj2yxnpcmxqwfwk50v35gq7wd399m',
+    service: [ 'twitter' ]
+  }
+}
 ```
 
 ## References
