@@ -1,6 +1,8 @@
 // @ts-check
 'use strict'
 
+require('dotenv').config()
+
 const Sequelize = require('sequelize')
 
 const models = [
