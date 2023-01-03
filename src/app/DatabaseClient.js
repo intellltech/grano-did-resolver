@@ -1,8 +1,6 @@
 // @ts-check
 'use strict'
 
-require('dotenv').config()
-
 require('../../sequelize/models')
 
 const Document = require('../../sequelize/models/Document')
