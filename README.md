@@ -1,4 +1,5 @@
-# grano-did-resolver
+# Grano DID Resolver
+Grano DID Resolver is a program that returns values according to the [DID specification](https://www.w3.org/TR/did-core/) defined by the [W3C](https://www.w3.org/). It depends on [Sequelize](https://github.com/sequelize/sequelize) and all values refer to the off-chain database.
 
 ## How to Use
 0. Create Mariadb and export data from [grano-did-contract](https://github.com/eg-easy/grano-did-contract) using [grano-did-exporter](https://github.com/eg-easy/grano-did-exporter)
