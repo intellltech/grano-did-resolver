@@ -2,7 +2,7 @@
 Grano DID Resolver is a program that returns values according to the [DID specification](https://www.w3.org/TR/did-core/) defined by the [W3C](https://www.w3.org/). It depends on [Sequelize](https://github.com/sequelize/sequelize) and all values refer to the off-chain database.
 
 ## How to Use
-0. Create Mariadb and export data from [grano-did-contract](https://github.com/eg-easy/grano-did-contract) using [grano-did-exporter](https://github.com/eg-easy/grano-did-exporter)
+0. Create Mariadb and export data from [grano-did-contract](https://github.com/intellltech/grano-did-contract) using [grano-did-exporter](https://github.com/intellltech/grano-did-exporter)
 
 1. Set DB configuration in `.env`
 ```env
@@ -17,7 +17,7 @@ PORT=3306
 2. Call Resolver
 ```index.js
 const { Resolver } = require('did-resolver')
-const { getResolver, DatabaseClient } = require('@eg-easy/grano-did-resolver')
+const { getResolver, DatabaseClient } = require('@intellltech/grano-did-resolver')
 
 const main = async () => {
   const dbClient = new DatabaseClient()
@@ -65,8 +65,8 @@ main()
 ```
 
 ## References
-- https://github.com/eg-easy/grano-did
-- https://github.com/EG-easy/grano-did-client
-- https://github.com/EG-easy/grano-did-contract
-- https://github.com/EG-easy/grano-did-exporter
-- https://github.com/EG-easy/grano-did-node
+- https://github.com/intellltech/grano-did
+- https://github.com/intellltech/grano-did-client
+- https://github.com/intellltech/grano-did-contract
+- https://github.com/intellltech/grano-did-exporter
+- https://github.com/intellltech/grano-did-node
